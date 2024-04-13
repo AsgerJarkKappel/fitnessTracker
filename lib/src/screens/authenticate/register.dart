@@ -26,16 +26,9 @@ class _RegisterState extends State<Register> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Colors.blue,
-
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-
         title: const Text(
-          "Sign up",
+          "Create an Account",
           style: TextStyle(
               color: Colors.white,
               fontSize: 25,
@@ -43,23 +36,33 @@ class _RegisterState extends State<Register> {
               letterSpacing: 3,
               fontWeight: FontWeight.bold),
         ),
+        toolbarHeight: 70,
         actions: <Widget>[
           IconButton(
               onPressed: () {
                 widget.toggleView();
               },
-              icon: const Icon(Icons.shopping_bag_rounded))
+              icon: const Icon(Icons.shopping_bag_rounded)),
         ],
       ),
-      body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Form(
             //Associate form key with form
             key: _formKey,
             child: Column(
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Centering vertically
+              // Stretching horizontally
               children: <Widget>[
-                const SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.email),
+                    hintText: 'Enter e-mail',
+                    labelText: 'E-mail',
+                  ),
                   validator: (value) =>
                       value!.isEmpty ? 'Enter an email' : null,
                   //update the value of email when ever it changes
@@ -71,37 +74,45 @@ class _RegisterState extends State<Register> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                    validator: (value) => value!.length < 6
-                        ? 'Enter a password 6+ chars long'
-                        : null,
-                    obscureText: true,
-                    onChanged: (val) {
-                      setState(() {
-                        password = val;
-                      });
-                    }),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.password),
+                    labelText: 'Password',
+                  ),
+                  validator: (value) => value!.length < 6
+                      ? 'Enter a password 6+ chars long'
+                      : null,
+                  obscureText: true,
+                  onChanged: (val) {
+                    setState(() {
+                      password = val;
+                    });
+                  },
+                ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
                   //Async because of Firebase communication takes time
                   onPressed: () {
-                    print("pressed");
+                    print("Registor pressed");
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.pink), // sets the background color of the button
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Colors.white), // sets the text color of the button
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.pink),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
                   ),
-                  child: const Text('Register'),
+                  child: const Text('Registor'),
                 ),
-                const SizedBox(
-                  height: 12.0,
+                const SizedBox(height: 12.0),
+                Text(
+                  error,
+                  style: const TextStyle(color: Colors.red, fontSize: 14.0),
                 ),
-                Text(error,
-                    style: const TextStyle(color: Colors.red, fontSize: 14.0))
               ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

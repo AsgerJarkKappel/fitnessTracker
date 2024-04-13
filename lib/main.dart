@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/screens/authenticate/authenticate.dart';
+import 'package:flutter_application_1/src/screens/home/home.dart';
 import 'package:flutter_application_1/src/wrapper.dart';
 
 import 'src/app.dart';
@@ -53,6 +55,6 @@ class MyAppDefault extends StatelessWidget {
           scaffoldBackgroundColor: const Color.fromARGB(255, 216, 216, 216),
           useMaterial3: true,
         ),
-        home: const Wrapper());
+        home: const Home());
   }
 }
